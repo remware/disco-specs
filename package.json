@@ -19,14 +19,75 @@
         "log-processing"
     ],
     "activationEvents": [
-        "onCommand:extension.compileSpecs"
+        "onLanguage:discospecsfile",
+        "onLanguage:discolog",
+        "onCommand:disco.compileSpecs",
+        "onCommand:disco.log2csv"
     ],
-    "main": "./out/extension",
+    "main": "./out/discoExtension",
     "contributes": {
+        "menus": {
+            "editor/context": [
+                {
+                "when": "editorLangId == discospecs",
+                "command": "disco.compileSpecs",
+                "group": "disco"
+                },
+                {
+                "when": "resourceFilename == disco-specs-animation.log",
+                "command": "disco.log2csv",
+                "group": "disco"
+                }               
+                ]            
+        },
+        "languages": [
+        {
+            "id": "discospecs",
+            "aliases": [
+            "Disco-Specs"
+            ],
+            "filenamePatterns": [
+            "*.dc"           
+            ]
+        },
+        {
+            "id": "discologs",
+            "aliases": [
+                "Disco-Logs"
+            ],
+            "filenamePatterns": [
+                "*.txt", "disco-specs-animation.log"
+            ]
+        }
+        ],
+        "configuration": {
+            "type" : "object",
+            "title": "Disco configuration options",
+            "properties": {
+                "disco.attachShellCommand.linux": {
+                "type": "string",
+                "default": "/bin/sh",
+                "description": "Attach command to compile specs for Linux"
+                },
+                "disco.attachShellCommand.windows": {
+                "type": "string",
+                "default": "cmd",
+                "description": "Attach command to compile specs for Windows"
+                }         
+            } 
+        },
         "commands": [
             {
-                "command": "extension.compileSpecs",
-                "title": "Compile specs"
+                "command": "disco.compileSpecs",
+                "title": "Compile disco specs",
+                "description": "Compile specs with configured compiler",
+                "category": "disco"
+            },
+            {
+                "command": "disco.log2csv",
+                "title": "Convert logs to csv",
+                "description": "Reduce logs to data processable csv",
+                "category": "disco"
             }
         ]
     },

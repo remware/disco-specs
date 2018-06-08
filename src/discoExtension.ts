@@ -9,6 +9,13 @@ import DiscoSpecsCompletionItemProvider from './disco-specs/discospecsCompletion
 
 export const FROM_DIRECTIVE_PATTERN = /^\s*FROM\s*([\w-\/:]*)(\s*AS\s*[a-z][a-z0-9-_\\.]*)?$/i;
 
+export type KeyInfo = { [keyName: string]: string; };
+
+export interface ComposeVersionKeys {
+    All: KeyInfo;
+    v2000: KeyInfo;
+}
+
 let client: LanguageClient;
 
 const DOCUMENT_SELECTOR: DocumentSelector = [
@@ -26,7 +33,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     // The command has been defined in the package.json file
     // Now provide the implementation of the ncommand with  registerCommand
     // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('extension.compileSpecs', () => {
+    let disposable = vscode.commands.registerCommand('disco.compileSpecs', () => {
         // The code you place here will be executed every time your command is executed
         let editor = vscode.window.activeTextEditor;
         if (!editor) {
@@ -38,9 +45,13 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         // Display a message box to the user
         vscode.window.showInformationMessage('Selected characters: ' + text.length);
     });
-
+    // register the command compileSpecs
     context.subscriptions.push(disposable);
 
+    // register keyword completion
+    context.subscriptions.push(vscode.languages.registerCompletionItemProvider(DOCUMENT_SELECTOR, new DiscoSpecsCompletionItemProvider(), '.'));
+    
+    //activate client
     activateLanguageClient(context);
 }
 
