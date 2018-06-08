@@ -4,11 +4,19 @@
     "description": "Disco specifications",
     "version": "0.0.1",
     "publisher": "remware",
+    "icon": "images/disco_icon.png",
     "engines": {
         "vscode": "^1.22.0"
     },
     "categories": [
+        "Programming Languages",
         "Other"
+    ],
+    "keywords": [
+        "disco",
+        "specifications",
+        "pseudo-code",
+        "log-processing"
     ],
     "activationEvents": [
         "onCommand:extension.compileSpecs"
@@ -35,5 +43,8 @@
         "tslint": "^5.8.0",
         "@types/node": "^7.0.43",
         "@types/mocha": "^2.2.42"
+    },
+    "dependencies": {
+        "vscode-languageclient": "^4.0.0"
     }
 }
