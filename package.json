@@ -29,52 +29,53 @@
         "menus": {
             "editor/context": [
                 {
-                "when": "editorLangId == discospecs",
-                "command": "disco.compileSpecs",
-                "group": "disco"
+                    "when": "editorLangId == discospecs",
+                    "command": "disco.compileSpecs",
+                    "group": "disco"
                 },
                 {
-                "when": "resourceFilename == disco-specs-animation.log",
-                "command": "disco.log2csv",
-                "group": "disco"
-                }               
-                ]            
+                    "when": "resourceFilename == disco-specs-animation.log",
+                    "command": "disco.log2csv",
+                    "group": "disco"
+                }
+            ]
         },
         "languages": [
-        {
-            "id": "discospecs",
-            "aliases": [
-            "Disco-Specs"
-            ],
-            "filenamePatterns": [
-            "*.dc"           
-            ]
-        },
-        {
-            "id": "discologs",
-            "aliases": [
-                "Disco-Logs"
-            ],
-            "filenamePatterns": [
-                "*.txt", "disco-specs-animation.log"
-            ]
-        }
+            {
+                "id": "discospecs",
+                "aliases": [
+                    "Disco-Specs"
+                ],
+                "filenamePatterns": [
+                    "*.dc"
+                ]
+            },
+            {
+                "id": "discologs",
+                "aliases": [
+                    "Disco-Logs"
+                ],
+                "filenamePatterns": [
+                    "*.txt",
+                    "disco-specs-animation.log"
+                ]
+            }
         ],
         "configuration": {
-            "type" : "object",
+            "type": "object",
             "title": "Disco configuration options",
             "properties": {
                 "disco.attachShellCommand.linux": {
-                "type": "string",
-                "default": "/bin/sh",
-                "description": "Attach command to compile specs for Linux"
+                    "type": "string",
+                    "default": "/bin/sh",
+                    "description": "Attach command to compile specs for Linux"
                 },
                 "disco.attachShellCommand.windows": {
-                "type": "string",
-                "default": "cmd",
-                "description": "Attach command to compile specs for Windows"
-                }         
-            } 
+                    "type": "string",
+                    "default": "cmd",
+                    "description": "Attach command to compile specs for Windows"
+                }
+            }
         },
         "commands": [
             {
@@ -99,11 +100,11 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.17",
-        "tslint": "^5.8.0",
+        "@types/mocha": "^2.2.42",
         "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
+        "tslint": "^5.8.0",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.30"
     },
     "dependencies": {
         "vscode-languageclient": "^4.0.0"
